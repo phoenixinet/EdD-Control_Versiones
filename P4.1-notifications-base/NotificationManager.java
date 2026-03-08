@@ -1,6 +1,7 @@
 public class NotificationManager {
 
     private NotificationService strategy;
+    private final int MAX_RETRIES = 3;
 
     public void setStrategy(NotificationService strategy) {
         this.strategy = strategy;
@@ -11,14 +12,26 @@ public class NotificationManager {
         if (strategy == null)
             throw new IllegalStateException("\n[!] Estrategia no definida!.");
 
+        int attempts = 0;
+
+        while (attempts < MAX_RETRIES)
+        {
+            attempts++;
             try 
             {
                 strategy.sendNotification(message, recipient);
                 return;
             } catch (Exception e) 
             {
-                System.out.println("\n[i] Fallo al enviar la notificación."); 
+                System.out.println("\n[i] Fallo al enviar la notificación. Intento: " + attempts + ". Error: + " + e.getMessage());  
+                
+                // Practica básica, no implemento delay para rate-limit
+
+                // Si ya agotamos los 3 intentos
+                if (attempts == MAX_RETRIES)
+                    throw new RuntimeException("\n[!!] No se pudo enviar la notificación después de " + MAX_RETRIES + " intentos");
             }
+        }
     }
 
     // NotificationManager.java - Código a refactorizar
