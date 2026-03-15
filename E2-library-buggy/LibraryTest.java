@@ -14,3 +14,11 @@ public class LibraryTest {
     }
 }
 
+@Test
+    void testBusqueda() {
+        Library lib = new Library();
+
+        lib.addBook(new Book("Shalome", "Bendiciones", "911"));
+
+        System.out.println("Resultado de la busqueda: " + lib.findBookByTitle("shalome"));
+    }
