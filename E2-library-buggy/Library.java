@@ -4,18 +4,17 @@ import java.util.*;
 public class Library {
     private List<Book> books = new ArrayList<>();
     
-    public void addBook(Book book) {
-        // BUG 4: Permite libros duplicados (mismo ISBN)
+    private boolean IsbnUnique(String isbn) {
         for (Book b : books)
-        {
-            String isbn = book.getIsbn();
             if (b.getIsbn().equals(isbn))
-            {
-                System.out.println("\n[!] El libro " + book.getTitle() + " ya existe. ISBN: " + isbn);
-                return;
-            }
+                return false;
+        return true;
+    }
+
+    public void addBook(Book book) {
+        if (IsbnUnique(book.getIsbn())) {
+            books.add(book);
         }
-        books.add(book);
     }
     
     public Book findBookByTitle(String title) {
