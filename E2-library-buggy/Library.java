@@ -39,4 +39,18 @@ public class Library {
     }
     
     // BUG 8: Falta método para quitar libros
+    public void removeBook(String isbn) {
+        Book buffer = null;
+
+        for (Book book : books)
+            if (book.getIsbn().equals(isbn)) {
+                buffer = book;
+                break;
+        }
+
+        if (buffer != null) {
+            books.remove(buffer);
+        }
+    }
 }
+
