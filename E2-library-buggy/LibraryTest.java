@@ -1,0 +1,16 @@
+import org.junit.jupiter.api.Test;
+
+public class LibraryTest {
+
+    @Test
+    public void testAddDuplicateBook() {
+        Library library = new Library();
+
+        Book book = new Book("Clean Code", "Robert Martin", "978-0132350884");
+        library.addBook(book);
+        library.addBook(book);
+
+        System.out.println("Libros existentes: " + library.findAvailableBooks().size());
+    }
+}
+
