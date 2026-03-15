@@ -21,11 +21,20 @@ public class Book {
     
     public void borrow() {
         // BUG 2: No valida si ya está prestado
-        available = false;
+        if (available) {
+            available = false;
+        }
+        else {
+            System.out.println("\n[i] Libro ya prestado. ERROR.");
+        }
     }
     
     public void returnBook() {
         // BUG 3: No valida si ya estaba disponible
-        available = true;
+        if (!available) {
+            available = true;
+        } else {
+            System.out.println("\n[i] Libro NO estaba prestado. ERROR.");
+        }
     }
 }
