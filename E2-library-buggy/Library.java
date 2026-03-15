@@ -29,8 +29,10 @@ public class Library {
     
     public List<Book> findAvailableBooks() {
         List<Book> availableBooks = new ArrayList<>();
+
+        List<Book> buffer = new ArrayList<>();
         // BUG 6: ConcurrentModificationException potencial
-        for (Book book : books) {
+        for (Book book : buffer) {
             if (book.isAvailable()) { // BUG 7: Siempre true, no verifica disponibilidad real
                 availableBooks.add(book);
             }
