@@ -6,6 +6,15 @@ public class Library {
     
     public void addBook(Book book) {
         // BUG 4: Permite libros duplicados (mismo ISBN)
+        for (Book b : books)
+        {
+            String isbn = book.getIsbn();
+            if (b.getIsbn().equals(isbn))
+            {
+                System.out.println("\n[!] El libro " + book.getTitle() + " ya existe. ISBN: " + isbn);
+                return;
+            }
+        }
         books.add(book);
     }
     
